@@ -14,43 +14,60 @@ class practice extends StatefulWidget {
   State<practice> createState() => _practiceState();
 }
 
-class _practiceState extends State<practice> {
+class _practiceState extends State<practice>
+    with SingleTickerProviderStateMixin {
+  @override
+  late AnimationController _animationController;
+  void initState() {
+    _animationController = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    )..repeat();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
-          children: [
-            Spacer(),
-            AnimatedContainer(
-              duration: const Duration(seconds: 1),
-              width: 200,
-              //ここのheightを変える
-              height: 100,
-              child: Image.asset(
-                'images/icon.png',
-                alignment: Alignment.bottomCenter,
-                fit: BoxFit.fitWidth,
+    return GestureDetector(
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              Spacer(),
+              AnimatedBuilder(
+                builder: (context, child) {
+                  return Container(
+                    width: 200,
+                    //ここのheightを変える
+                    height: _animationController.value * 200,
+                    child: Image.asset(
+                      'images/icon.png',
+                      alignment: Alignment.bottomCenter,
+                      fit: BoxFit.fitWidth,
+                    ),
+                  );
+                },
+                animation: _animationController,
               ),
-            ),
-          ],
-        ),
-        Column(
-          children: [
-            Spacer(),
-            AnimatedContainer(
-              duration: const Duration(seconds: 1),
-              width: 200,
-              height: 200,
-              child: Image.asset(
-                'images/iconBorder.png',
-                alignment: Alignment.bottomCenter,
-                fit: BoxFit.fitWidth,
+            ],
+          ),
+          Column(
+            children: [
+              Spacer(),
+              AnimatedContainer(
+                duration: const Duration(seconds: 1),
+                width: 200,
+                height: 200,
+                child: Image.asset(
+                  'images/iconBorder.png',
+                  alignment: Alignment.bottomCenter,
+                  fit: BoxFit.fitWidth,
+                ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
