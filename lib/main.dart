@@ -17,19 +17,38 @@ class practice extends StatefulWidget {
 class _practiceState extends State<practice> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        Spacer(),
-        AnimatedContainer(
-          duration: const Duration(seconds: 1),
-          width: 200,
-          height: 100,
-          color: Colors.blue,
-          child: Image.asset(
-            'images/appleFruits.png',
-            alignment: Alignment.bottomCenter,
-            fit: BoxFit.fitWidth,
-          ),
+        Column(
+          children: [
+            Spacer(),
+            AnimatedContainer(
+              duration: const Duration(seconds: 1),
+              width: 200,
+              //ここのheightを変える
+              height: 100,
+              child: Image.asset(
+                'images/icon.png',
+                alignment: Alignment.bottomCenter,
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            Spacer(),
+            AnimatedContainer(
+              duration: const Duration(seconds: 1),
+              width: 200,
+              height: 200,
+              child: Image.asset(
+                'images/iconBorder.png',
+                alignment: Alignment.bottomCenter,
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+          ],
         ),
       ],
     );
